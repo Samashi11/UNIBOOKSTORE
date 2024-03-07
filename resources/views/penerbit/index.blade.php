@@ -176,7 +176,7 @@
                       <h4 class="mb-0 text-primary text-gradient font-bold">Data Penerbit</h4>
                     </div>
                     <div class="col-6 text-end">
-                      <a class="btn bg-gradient-warning mb-0" href="{{ route('buku.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Publisher</a>
+                      <a class="btn bg-gradient-warning mb-0" href="{{ route('penerbit.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Publisher</a>
                     </div>
                 </div>
             </div>

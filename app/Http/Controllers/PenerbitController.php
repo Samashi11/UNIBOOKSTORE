@@ -11,7 +11,7 @@ class PenerbitController extends Controller
     public $penerbit;
     public function __construct()
     {
-        $this->penerbit = new buku();
+        $this->penerbit = new Penerbit();
     }
     public function index(Request $request)
     {
@@ -36,33 +36,30 @@ class PenerbitController extends Controller
     {
         $rules = [
             'kode' => 'required|unique:buku',
-            'nama_buku' => 'required|min:3|max:50',
-            'harga' => 'required|min:3|max:50',
-            'penerbit' => 'required',
-            'stok' => 'required|min:1|max:50',
-            'kategori' => 'required|min:3|max:50'
+            'nama' => 'required|min:3|max:50',
+            'kota' => 'required|min:3|max:50',
+            'alamat' => 'required',
+            'telepon' => 'required|min:1|max:50',
         ];
         // bikin pesan error
         $messages = [
             'kode.required' => ':attribute harus diisi.',
             'kode.unique' => ':attribute sudah digunakan.',
-            'nama_buku.required' => ':attribute harus diisi.',
-            'nama_buku.min' => ':attribute harus memiliki minimal :min karakter.',
-            'nama_buku.max' => ':attribute tidak boleh melebihi :max karakter.',
-            'harga.required' => 'Deskripsi harus diisi.',
-            'penerbit.required' => 'Penerbit harus diisi.',
-            'stok.required' => 'ISBN harus diisi.',
-            'kategori.required' => 'Kategori harus dipilih.'
+            'nama.required' => ':attribute harus diisi.',
+            'nama.min' => ':attribute harus memiliki minimal :min karakter.',
+            'nama.max' => ':attribute tidak boleh melebihi :max karakter.',
+            'kota.required' => ':attribute harus diisi.',
+            'alamat.required' => ':attribute harus diisi.',
+            'telepon.required' => ':attribute harus diisi.'
         ];
         // eksekusii
         $this->validate($request, $rules, $messages);
 
-        $this->penerbit->nama_buku = $request->nama_buku;
+        $this->penerbit->nama = $request->nama;
         $this->penerbit->kode = $request->kode;
-        $this->penerbit->kategori = $request->kategori;
-        $this->penerbit->harga = $request->harga;
-        $this->penerbit->stok = $request->stok;
-        $this->penerbit->penerbit_id = $request->penerbit;
+        $this->penerbit->alamat = $request->alamat;
+        $this->penerbit->telepon = $request->telepon;
+        $this->penerbit->kota = $request->kota;
 
         $this->penerbit->save();
         // Alert::success('Succespul!...', ' Data Berhasil Disimpan');
@@ -72,11 +69,11 @@ class PenerbitController extends Controller
 
     public function edit($id)
     {
-        $penerbit = Penerbit::findOrFail($id);
+        $penerbits = Penerbit::findOrFail($id);
 
         $penerbit = Penerbit::all();
         $buku = Buku::all();
-        return view('penerbit.edit', compact('buku','book','penerbit'));
+        return view('penerbit.edit', compact('buku','penerbits','penerbit'));
     }
 
     public function update(Request $request, $id)
@@ -84,34 +81,31 @@ class PenerbitController extends Controller
         $penerbit = Penerbit::findOrFail($id);
 
         $rules = [
-            'kode' => 'required',
-            'nama_buku' => 'required|min:3|max:50',
-            'harga' => 'required|min:3|max:50',
-            'penerbit' => 'required',
-            'stok' => 'required|min:1|max:50',
-            'kategori' => 'required|min:3|max:50'
+            'kode' => 'required|unique:buku',
+            'nama' => 'required|min:3|max:50',
+            'kota' => 'required|min:3|max:50',
+            'alamat' => 'required',
+            'telepon' => 'required|min:1|max:50',
         ];
         // bikin pesan error
         $messages = [
             'kode.required' => ':attribute harus diisi.',
             'kode.unique' => ':attribute sudah digunakan.',
-            'nama_buku.required' => ':attribute harus diisi.',
-            'nama_buku.min' => ':attribute harus memiliki minimal :min karakter.',
-            'nama_buku.max' => ':attribute tidak boleh melebihi :max karakter.',
-            'harga.required' => 'Deskripsi harus diisi.',
-            'penerbit.required' => 'Penerbit harus diisi.',
-            'stok.required' => 'ISBN harus diisi.',
-            'kategori.required' => 'Kategori harus dipilih.'
+            'nama.required' => ':attribute harus diisi.',
+            'nama.min' => ':attribute harus memiliki minimal :min karakter.',
+            'nama.max' => ':attribute tidak boleh melebihi :max karakter.',
+            'kota.required' => ':attribute harus diisi.',
+            'alamat.required' => ':attribute harus diisi.',
+            'telepon.required' => ':attribute harus diisi.'
         ];
         // eksekusii
         $this->validate($request, $rules, $messages);
 
-        $penerbit->nama_buku = $request->nama_buku;
+        $penerbit->nama = $request->nama;
         $penerbit->kode = $request->kode;
-        $penerbit->kategori = $request->kategori;
-        $penerbit->harga = $request->harga;
-        $penerbit->stok = $request->stok;
-        $penerbit->penerbit_id = $request->penerbit;
+        $penerbit->alamat = $request->alamat;
+        $penerbit->telepon = $request->telepon;
+        $penerbit->kota = $request->kota;
 
         $penerbit->save();
         // Alert::success('Succespul!...', ' Data Berhasil Disimpan');
@@ -124,7 +118,6 @@ class PenerbitController extends Controller
         $penerbit = Penerbit::findOrFail($id);
 
         $penerbit->delete();
-
 
        // Alert::success('Berhasil!', 'Data berhasil dihapus');
 

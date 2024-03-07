@@ -5,7 +5,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
             <img src="{{ asset('dash') }}/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">UNIBOOKSTORE Dashboard</span>
+            <span class="ms-1 font-weight-bold">UNIPublishersTORE Dashboard</span>
         </a>
         </div>
         <hr class="horizontal dark mt-0">
@@ -40,7 +40,7 @@
             <li class="nav-item ">
             <a class="nav-link " href="{{ route('buku.index') }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="ni ni-books text-lg text-white opacity-100" aria-hidden="true"></i>
+                    <i class="ni ni-books text-lg text-primary text-gradient" aria-hidden="true"></i>
                     <title>Books</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -59,7 +59,7 @@
             <li class="nav-item">
             <a class="nav-link active" href="{{ route('penerbit.index') }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="ni ni-settings text-lg text-primary text-gradient" aria-hidden="true"></i>
+                    <i class="ni ni-settings text-lg text-white opacity-100 " aria-hidden="true"></i>
                     <title>Publishers</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -106,10 +106,10 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('admin') }}">Dashboard</a></li>
-            <li class="breadcrumb-item text-sm text-dark" aria-current="page"><a class="opacity-5 text-dark" href="{{ route('buku.index') }}">Books</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Book Create</li>
+            <li class="breadcrumb-item text-sm text-dark" aria-current="page"><a class="opacity-5 text-dark" href="{{ route('penerbit.index') }}">Publishers</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Publisher Create</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Book Create</h6>
+            <h6 class="font-weight-bolder mb-0">Publisher Create</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -168,36 +168,55 @@
             <div class="card-header pb-0 bg-transparent">
                 <div class="row">
                     <div class="col-6 align-items-center">
-                        <h3 class="font-weight-bolder text-info text-gradient">Book Create</h3>
+                        <h3 class="font-weight-bolder text-info text-gradient">Publisher Create</h3>
                         <p class="text-danger mb-0 text-sm">(*) Wajib Diisi</p>
                     </div>
                     <div class="col-6 text-end">
-                        <a class="btn bg-gradient-warning mb-0" href="{{ route('buku.index') }}"><i class="fas fa-chevron-left me-2"></i>Back</a>
+                        <a class="btn bg-gradient-warning mb-0" href="{{ route('penerbit.index') }}"><i class="fas fa-chevron-left me-2"></i>Back</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('buku.store') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ route('penerbit.store') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col">
-                            <label>Nama Buku<small class="text-danger ms-1">*</small></label>
+                            <label>Nama Penerbit<small class="text-danger ms-1">*</small></label>
                             <div class="mb-3">
-                                <input type="text" class="form-control @error('nama_buku') is-invalid @enderror" name="nama_buku" placeholder="Nama Buku" aria-label="nama_buku Buku" aria-describedby="nama_buku Buku-addon">
-                                @error('nama_buku')
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama Penerbit" aria-label="nama Buku" aria-describedby="nama Buku-addon">
+                                @error('nama')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <!-- Penyesuaian nama input -->
-                            <label>Kategori<small class="text-danger ms-1">*</small></label>
+                            <label>Alamat<small class="text-danger ms-1">*</small></label>
                             <div class="mb-3">
-                                <input type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" placeholder="Kategori" aria-label="kategori" aria-describedby="kategori-addon">
+                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" placeholder="alamat" aria-label="alamat" aria-describedby="alamat-addon">
                                 <!-- Penyesuaian validasi -->
-                                @error('kategori')
+                                @error('alamat')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <label>Kode<small class="text-danger ms-1">*</small></label>
+                        </div>
+                        <div class="col">
+                            <label>Kota<small class="text-danger ms-1">*</small></label>
+                            <div class="mb-3">
+                                <input type="text" class="form-control @error('kota') is-invalid @enderror" name="kota" placeholder="kota" aria-label="kota" aria-describedby="kota-addon">
+                                <!-- Penyesuaian validasi -->
+                                @error('kota')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <label>Telepon<small class="text-danger ms-1">*</small></label>
+                            <div class="mb-3">
+                                <input type="text" class="form-control @error('telepon') is-invalid @enderror" name="telepon" placeholder="telepon" aria-label="telepon" aria-describedby="telepon-addon">
+                                <!-- Penyesuaian validasi -->
+                                @error('telepon')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <label>Kode<small class="text-danger ms-1">*</small></label>
                             <div class="mb-3">
                                 <input type="text" class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Kode" aria-label="kode" aria-describedby="kode-addon">
                                 <!-- Penyesuaian validasi -->
@@ -205,43 +224,10 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="col">
-                            <label>Penerbit<small class="text-danger ms-1">*</small></label>
-                            <div class="mb-3">
-                                <select class="form-select @error('penerbit') is-invalid @enderror" name="penerbit" aria-label="Default select example">
-                                    <option selected hidden></option>
-                                    @foreach ($penerbit as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
-                                <!-- Penyesuaian validasi -->
-                                @error('penerbit')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <label>Harga<small class="text-danger ms-1">*</small></label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga" placeholder="Harga" aria-label="harga" aria-describedby="harga-addon">
-                                <!-- Penyesuaian validasi -->
-                                @error('harga')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <label>Stok<small class="text-danger ms-1">*</small></label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok" placeholder="Stok" aria-label="stok" aria-describedby="stok-addon">
-                                <!-- Penyesuaian validasi -->
-                                @error('stok')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Book</button>
+                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Publisher</button>
                     </div>
                 </form>
             </div>

@@ -23,10 +23,10 @@ class DashController extends Controller
 
     public function pengadaan()
     {
-        $buku = Buku::all();
+        $buku = Buku::orderBy("stok", "ASC")->take(1)->get();
         $penerbit = Penerbit::all();
 
         $no = 1;
-        return view('pengadaan', compact('penerbit','buku','book', 'no'));
+        return view('pengadaan', compact('penerbit', 'buku', 'no'));
     }
 }

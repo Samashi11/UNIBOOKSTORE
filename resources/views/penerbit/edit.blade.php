@@ -40,7 +40,7 @@
             <li class="nav-item ">
             <a class="nav-link " href="{{ route('buku.index') }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="ni ni-books text-lg text-white opacity-100" aria-hidden="true"></i>
+                    <i class="ni ni-books text-lg text-primary text-gradient" aria-hidden="true"></i>
                     <title>Books</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -59,7 +59,7 @@
             <li class="nav-item">
             <a class="nav-link active" href="{{ route('penerbit.index') }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="ni ni-settings text-lg text-primary text-gradient" aria-hidden="true"></i>
+                    <i class="ni ni-settings text-lg text-white opacity-100 " aria-hidden="true"></i>
                     <title>Publishers</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -79,7 +79,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pegadaan</h6>
             </li>
             <li class="nav-item">
-            <a class="nav-link " href="{{ route('pengadaan') }}">
+            <a class="nav-link  " href="{{ route('pengadaan') }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-books text-lg text-primary text-gradient" aria-hidden="true"></i>
                     <title>Book Procurement</title>
@@ -106,10 +106,10 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('admin') }}">Dashboard</a></li>
-            <li class="breadcrumb-item text-sm text-dark" aria-current="page"><a class="opacity-5 text-dark" href="{{ route('buku.index') }}">Books</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Book Update</li>
+            <li class="breadcrumb-item text-sm text-dark" aria-current="page"><a class="opacity-5 text-dark" href="{{ route('penerbit.index') }}">Publishers</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Publisher Update</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Book Update</h6>
+            <h6 class="font-weight-bolder mb-0">Publisher Update</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -168,81 +168,67 @@
             <div class="card-header pb-0 bg-transparent">
                 <div class="row">
                     <div class="col-6 align-items-center">
-                        <h3 class="font-weight-bolder text-info text-gradient">Book Update</h3>
+                        <h3 class="font-weight-bolder text-info text-gradient">Publisher Update</h3>
                         <p class="text-danger mb-0 text-sm">(*) Wajib Diisi</p>
                     </div>
                     <div class="col-6 text-end">
-                        <a class="btn bg-gradient-warning mb-0" href="{{ route('buku.index') }}"><i class="fas fa-chevron-left me-2"></i>Back</a>
+                        <a class="btn bg-gradient-warning mb-0" href="{{ route('penerbit.index') }}"><i class="fas fa-chevron-left me-2"></i>Back</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('buku.update',$book->id) }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ route('penerbit.update',$penerbits->id) }}" enctype="multipart/form-data" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="row">
                         <div class="col">
-                            <label>Nama Buku<small class="text-danger ms-1">*</small></label>
+                            <label>Nama Penerbit<small class="text-danger ms-1">*</small></label>
                             <div class="mb-3">
-                                <input type="text" class="form-control @error('nama_buku') is-invalid @enderror" value="{{$book->nama_buku}}" name="nama_buku" placeholder="Nama Buku" aria-label="nama_buku Buku" aria-describedby="nama_buku Buku-addon">
-                                @error('nama_buku')
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ $penerbits->nama }}" name="nama" placeholder="Nama Penerbit" aria-label="nama Buku" aria-describedby="nama Buku-addon">
+                                @error('nama')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <!-- Penyesuaian nama input -->
-                            <label>Kategori<small class="text-danger ms-1">*</small></label>
+                            <label>Alamat<small class="text-danger ms-1">*</small></label>
                             <div class="mb-3">
-                                <input type="text" class="form-control @error('kategori') is-invalid @enderror" value="{{$book->kategori}}" name="kategori" placeholder="Kategori" aria-label="kategori" aria-describedby="kategori-addon">
+                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" value="{{ $penerbits->alamat }}" name="alamat" placeholder="alamat" aria-label="alamat" aria-describedby="alamat-addon">
                                 <!-- Penyesuaian validasi -->
-                                @error('kategori')
+                                @error('alamat')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <label>Kode<small class="text-danger ms-1">*</small></label>
+                        </div>
+                        <div class="col">
+                            <label>Kota<small class="text-danger ms-1">*</small></label>
                             <div class="mb-3">
-                                <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{$book->kode}}" name="kode" placeholder="Kode" aria-label="kode" aria-describedby="kode-addon">
+                                <input type="text" class="form-control @error('kota') is-invalid @enderror" value="{{ $penerbits->kota }}" name="kota" placeholder="kota" aria-label="kota" aria-describedby="kota-addon">
+                                <!-- Penyesuaian validasi -->
+                                @error('kota')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <label>Telepon<small class="text-danger ms-1">*</small></label>
+                            <div class="mb-3">
+                                <input type="text" class="form-control @error('telepon') is-invalid @enderror" value="{{ $penerbits->telepon }}" name="telepon" placeholder="telepon" aria-label="telepon" aria-describedby="telepon-addon">
+                                <!-- Penyesuaian validasi -->
+                                @error('telepon')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <label>Kode<small class="text-danger ms-1">*</small></label>
+                            <div class="mb-3">
+                                <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $penerbits->kode }}" name="kode" placeholder="Kode" aria-label="kode" aria-describedby="kode-addon">
                                 <!-- Penyesuaian validasi -->
                                 @error('kode')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="col">
-                            <label>Penerbit<small class="text-danger ms-1">*</small></label>
-                            <div class="mb-3">
-                                <select class="form-select @error('penerbit') is-invalid @enderror" value="" name="penerbit" aria-label="Default select example">
-                                    <option selected hidden></option>
-                                    @foreach ($penerbit as $item)
-                                        <option value="{{ $item->id }}" {{ $book->penerbit_id == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
-                                <!-- Penyesuaian validasi -->
-                                @error('penerbit')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <label>Harga<small class="text-danger ms-1">*</small></label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control @error('harga') is-invalid @enderror" value="{{$book->harga}}" name="harga" placeholder="Harga" aria-label="harga" aria-describedby="harga-addon">
-                                <!-- Penyesuaian validasi -->
-                                @error('harga')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <label>Stok<small class="text-danger ms-1">*</small></label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control @error('stok') is-invalid @enderror" value="{{$book->stok}}" name="stok" placeholder="Stok" aria-label="stok" aria-describedby="stok-addon">
-                                <!-- Penyesuaian validasi -->
-                                @error('stok')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0"><i class="fas fa-plus"></i>&nbsp;&nbsp;Update Book</button>
+                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0"><i class="fas fa-plus"></i>&nbsp;&nbsp;Update Publisher</button>
                     </div>
                 </form>
             </div>

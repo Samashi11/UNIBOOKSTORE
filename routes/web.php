@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashController::class, 'index'])->middleware(['auth'])->name('admin');
 
-Route::get('/procurement', [DashController::class, 'index'])->middleware(['auth'])->name('pengadaan');
+Route::get('/procurement', [DashController::class, 'pengadaan'])->middleware(['auth'])->name('pengadaan');
 
 
 Route::middleware('auth')->group(function () {
